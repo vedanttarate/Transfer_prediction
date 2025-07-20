@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Option Assignment System</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background: #f5f5f5; }
+        .container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { color: #333; text-align: center; }
+        .upload-area { border: 2px dashed #ccc; padding: 40px; text-align: center; margin: 20px 0; border-radius: 10px; }
+        .btn { background: #007bff; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+        .flash { padding: 10px; margin: 10px 0; border-radius: 5px; background: #f8d7da; color: #721c24; }
+        .requirements { background: #f8f9fa; padding: 20px; border-radius: 5px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Option Assignment System</h1>
+        
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="flash">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form method="post" enctype="multipart/form-data">
+            <div class="upload-area">
+                <h3>Upload Excel File</h3>
+                <p>Select your Excel file containing the assignment data</p>
+                <input type="file" name="file" accept=".xlsx,.xls" required>
+            </div>
+            <button type="submit" class="btn">Process Assignment</button>
+        </form>
+
+        <div class="requirements">
+            <h3>File Requirements:</h3>
+            <ul>
+                <li>Excel file (.xlsx or .xls format)</li>
+                <li>Columns: Name, UDISE, OPTION1 to OPTION30</li>
+                <li>Data sorted by seniority (most senior at top)</li>
+                <li>Current user in the last row</li>
+                <li>OPTION columns contain numerical preference values</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html> 
